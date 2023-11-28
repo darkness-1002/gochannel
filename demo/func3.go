@@ -18,7 +18,9 @@ func Func3(ch1 chan ResultWithError, wg *sync.WaitGroup, m *sync.Mutex) {
 	ch1 <- ResultWithError{RespBody: res, APIError: nil}
 
 	// Create a new channel for receiving data from Func4
-	ch2 := make(chan ResultWithError)
+
+	//always define size of the channel
+	ch2 := make(chan ResultWithError, 1)
 
 	var wg2 sync.WaitGroup
 	wg2.Add(1)
@@ -34,10 +36,11 @@ func Func3(ch1 chan ResultWithError, wg *sync.WaitGroup, m *sync.Mutex) {
 	respBody := result.RespBody
 	fmt.Println("Result in func3 after func4 is ", respBody)
 
+	ch2 <- result
 	ch3 := make(chan ResultWithError)
 	wg2.Add(1)
-	// go Func5(ch2, ch3, &wg2, m)
-	go Func5(result, ch3, &wg2, m)
+	go Func5(ch2, ch3, &wg2, m)
+	// go Func5(result, ch3, &wg2, m)
 
 	result2, ok := <-ch3
 
