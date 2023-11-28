@@ -46,6 +46,6 @@ func main() {
 	} else {
 		// Add 10 to the result and print
 		updatedResult := result.RespBody + 10
-		fmt.Printf("Updated result from Func1: %v\n", updatedResult)
+		fmt.Printf("Updated result from Func1 in maing.go is : %v\n", updatedResult)
 	}
 }
