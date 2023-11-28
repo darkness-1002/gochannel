@@ -15,11 +15,7 @@ func main() {
 	// Create a wait group to wait for Func1 to finish
 	var wg sync.WaitGroup
 
-	// Start Func1 in a goroutine
-	// wg.Add(1)
-	// // go Func1(dataChannel, &wg)
-	// go demo.Func1(dataChannel, &wg, &m)
-
+	
 	wg.Add(1)
 	// go Func1(dataChannel, &wg)
 	go demo.Func3(dataChannel, &wg, &m)
